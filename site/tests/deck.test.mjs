@@ -25,3 +25,28 @@ test("extracted text boxes use the fixed slide coordinate system", () => {
     }
   }
 });
+
+test("slide 03 applies only the approved chart-line and summary corrections", () => {
+  const slide = data.slides.find((item) => item.id === "03");
+  assert.deepEqual(slide.patches, [
+    {
+      kind: "erase",
+      y: 269,
+      h: 2,
+      segments: [
+        { x: 123, w: 25 },
+        { x: 451, w: 10 },
+        { x: 808, w: 12 },
+        { x: 1094, w: 18 },
+      ],
+    },
+    {
+      kind: "replace-text",
+      x: 1203,
+      y: 713,
+      w: 384,
+      h: 29,
+      text: "投资活跃度显著增强。",
+    },
+  ]);
+});

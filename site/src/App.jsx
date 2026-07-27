@@ -58,7 +58,43 @@ function loadEdits(id) {
   }
 }
 
-function SlideCanvas({ id, textBoxes = [], edits = {}, editable = false, onEdit }) {
+function SlidePatches({ patches = [] }) {
+  return patches.map((patch, index) => {
+    if (patch.kind === "erase") {
+      return patch.segments.map((segment, segmentIndex) => (
+        <span
+          key={`${index}-${segmentIndex}`}
+          className="slide-patch erase-line"
+          style={{
+            left: segment.x,
+            top: patch.y,
+            width: segment.w,
+            height: patch.h,
+          }}
+        />
+      ));
+    }
+    if (patch.kind === "replace-text") {
+      return (
+        <span
+          key={index}
+          className="slide-patch replace-text"
+          style={{
+            left: patch.x,
+            top: patch.y,
+            width: patch.w,
+            height: patch.h,
+          }}
+        >
+          {patch.text}
+        </span>
+      );
+    }
+    return null;
+  });
+}
+
+function SlideCanvas({ id, textBoxes = [], patches = [], edits = {}, editable = false, onEdit }) {
   const stackedEditor = editable && window.matchMedia("(max-width: 980px)").matches;
   const scale = useScale(editable ? 128 : 0, editable && !stackedEditor ? 394 : 0);
   const overrides = edits.texts || {};
@@ -74,6 +110,7 @@ function SlideCanvas({ id, textBoxes = [], edits = {}, editable = false, onEdit 
         aria-label={`第${Number(id)}页`}
       >
         <img className="blueprint" src={blueprintUrl(id)} alt="" draggable="false" />
+        <SlidePatches patches={patches} />
         {textBoxes.map((box) => {
           const changed = Object.prototype.hasOwnProperty.call(overrides, box.key);
           if (!editable && !changed) return null;
@@ -109,7 +146,7 @@ function SlideView({ id, data }) {
   useEffect(() => setEdits(loadEdits(id)), [id]);
   return (
     <main className="viewer">
-      <SlideCanvas id={id} textBoxes={slide?.textBoxes} edits={edits} />
+      <SlideCanvas id={id} textBoxes={slide?.textBoxes} patches={slide?.patches} edits={edits} />
     </main>
   );
 }
@@ -171,6 +208,7 @@ function Editor({ id, data }) {
         <SlideCanvas
           id={id}
           textBoxes={slide?.textBoxes}
+          patches={slide?.patches}
           edits={draft}
           editable
           onEdit={updateText}

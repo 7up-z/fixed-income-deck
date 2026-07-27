@@ -55,6 +55,27 @@ button, textarea { font: inherit; }
   pointer-events: none;
 }
 
+.slide-patch {
+  position: absolute;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.slide-patch.erase-line {
+  background: #f8f9f7;
+}
+
+.slide-patch.replace-text {
+  overflow: hidden;
+  padding: 1px 3px;
+  color: #173c33;
+  background: #f8f9f7;
+  font-size: 17px;
+  line-height: 27px;
+  font-weight: 400;
+  white-space: nowrap;
+}
+
 .text-hotspot {
   position: absolute;
   z-index: 2;
@@ -118,7 +139,13 @@ button, textarea { font: inherit; }
   box-shadow: 0 14px 35px rgba(22, 62, 48, .08);
 }
 
-.thumb { display: block; aspect-ratio: 1672 / 941; overflow: hidden; background: #fff; }
+.thumb {
+  position: relative;
+  display: block;
+  aspect-ratio: 1672 / 941;
+  overflow: hidden;
+  background: #fff;
+}
 .thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform .2s ease; }
 .thumb:hover img { transform: scale(1.015); }
 
