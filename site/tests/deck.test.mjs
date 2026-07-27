@@ -1,5 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import { createHash } from "node:crypto";
 import fs from "node:fs";
 
 const data = JSON.parse(fs.readFileSync(new URL("../public/data/slides.json", import.meta.url)));
@@ -26,27 +27,15 @@ test("extracted text boxes use the fixed slide coordinate system", () => {
   }
 });
 
-test("slide 03 applies only the approved chart-line and summary corrections", () => {
+test("slide 03 corrections are baked into the blueprint without DOM patches", () => {
   const slide = data.slides.find((item) => item.id === "03");
-  assert.deepEqual(slide.patches, [
-    {
-      kind: "erase",
-      y: 269,
-      h: 2,
-      segments: [
-        { x: 123, w: 25 },
-        { x: 451, w: 10 },
-        { x: 808, w: 12 },
-        { x: 1094, w: 18 },
-      ],
-    },
-    {
-      kind: "replace-text",
-      x: 1203,
-      y: 713,
-      w: 384,
-      h: 29,
-      text: "投资活跃度显著增强。",
-    },
-  ]);
+  assert.equal(slide.patches, undefined);
+
+  const image = fs.readFileSync(
+    new URL("../public/blueprints-web/slide-03.jpg", import.meta.url),
+  );
+  assert.equal(
+    createHash("sha256").update(image).digest("hex"),
+    "db81fe839d22e7e1df9fa0cbf0b7849993838d3c64fd8faa1025709613b3e156",
+  );
 });
