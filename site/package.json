@@ -1,0 +1,23 @@
+{
+  "name": "site",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build && node scripts/prepare-sites-build.mjs",
+    "build:pages": "DEPLOY_TARGET=github VITE_BLUEPRINT_ROOT=blueprints-web VITE_BLUEPRINT_EXT=jpg vite build && node scripts/prepare-github-pages.mjs",
+    "preview": "vite preview",
+    "extract:deck": "python3 scripts/extract_deck.py",
+    "check:deck": "node --test tests/deck.test.mjs",
+    "test:sites": "node --test tests/sites-worker.test.mjs",
+    "test:pages": "node --test tests/github-pages.test.mjs"
+  },
+  "dependencies": {
+    "@vitejs/plugin-react": "5.0.4",
+    "vite": "6.4.2",
+    "react": "19.2.0",
+    "react-dom": "19.2.0"
+  },
+  "devDependencies": {}
+}
