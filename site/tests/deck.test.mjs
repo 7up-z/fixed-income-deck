@@ -52,3 +52,13 @@ test("slide 04 corrections are baked into the blueprint without DOM patches", ()
     "eb1d8f4679d9e7bd83c69673f1cb73d962f8c45549d523e350ddfac9e89b40a1",
   );
 });
+
+test("slide 05 uses the revised regional analysis blueprint", () => {
+  const image = fs.readFileSync(
+    new URL("../public/blueprints-web/slide-05.jpg", import.meta.url),
+  );
+  assert.equal(
+    createHash("sha256").update(image).digest("hex"),
+    "c22db3fecaaa40bf1d86eaec235c9b53ba4a422691261bdba171131345985189",
+  );
+});
