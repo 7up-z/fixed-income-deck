@@ -62,3 +62,13 @@ test("slide 05 uses the revised regional analysis blueprint", () => {
     "c85e6cfda7b34807eddd001c2fe1d11c843d5f9c68f86168a361029fa3f3fcbc",
   );
 });
+
+test("slide 06 subtitle uses the shared section-title color", () => {
+  const image = fs.readFileSync(
+    new URL("../public/blueprints-web/slide-06.jpg", import.meta.url),
+  );
+  assert.equal(
+    createHash("sha256").update(image).digest("hex"),
+    "7a0f68d8456880ca4a0654af46aa8a2c9a8c9366f4886326d61043190b555cdf",
+  );
+});
