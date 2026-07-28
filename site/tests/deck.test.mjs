@@ -59,6 +59,6 @@ test("slide 05 uses the revised regional analysis blueprint", () => {
   );
   assert.equal(
     createHash("sha256").update(image).digest("hex"),
-    "baaa85d2cc232b85d49b23c8acb20d47cc9bc8eac583f32f7d50fbcf9ff7465c",
+    "c85e6cfda7b34807eddd001c2fe1d11c843d5f9c68f86168a361029fa3f3fcbc",
   );
 });
