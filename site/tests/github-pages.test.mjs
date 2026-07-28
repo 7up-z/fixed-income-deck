@@ -23,3 +23,9 @@ test("all 22 slide and edit routes have static entry pages", () => {
 test("GitHub Pages build disables Jekyll processing", () => {
   assert.ok(fs.existsSync(path.join(client, ".nojekyll")));
 });
+
+test("blueprint image URLs include a deployment version", () => {
+  const app = fs.readFileSync(path.join(root, "src", "App.jsx"), "utf8");
+  assert.match(app, /VITE_ASSET_VERSION/);
+  assert.match(app, /slide-\$\{id\}\.\$\{BLUEPRINT_EXT\}\?v=/);
+});

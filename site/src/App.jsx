@@ -7,6 +7,7 @@ const HEIGHT = 941;
 const BASE_URL = import.meta.env.BASE_URL;
 const BLUEPRINT_ROOT = import.meta.env.VITE_BLUEPRINT_ROOT || "blueprints";
 const BLUEPRINT_EXT = import.meta.env.VITE_BLUEPRINT_EXT || "png";
+const ASSET_VERSION = import.meta.env.VITE_ASSET_VERSION || "local";
 
 function slideId(value) {
   const number = Math.max(1, Math.min(SLIDE_COUNT, Number(value) || 1));
@@ -14,7 +15,7 @@ function slideId(value) {
 }
 
 function blueprintUrl(id) {
-  return `${BASE_URL}${BLUEPRINT_ROOT}/slide-${id}.${BLUEPRINT_EXT}`;
+  return `${BASE_URL}${BLUEPRINT_ROOT}/slide-${id}.${BLUEPRINT_EXT}?v=${encodeURIComponent(ASSET_VERSION)}`;
 }
 
 function pageUrl(path = "") {
