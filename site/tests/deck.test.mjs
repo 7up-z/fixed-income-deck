@@ -82,3 +82,13 @@ test("slide 07 subtitle uses Arabic numbering and the shared color", () => {
     "6f7ffb207e48fc4758761de59c8599e2b37d37f2f1d16b0f42ff63ba37fdba17",
   );
 });
+
+test("slide 08 contains the revised policy analysis copy", () => {
+  const image = fs.readFileSync(
+    new URL("../public/blueprints-web/slide-08.jpg", import.meta.url),
+  );
+  assert.equal(
+    createHash("sha256").update(image).digest("hex"),
+    "c2fdb02725f9fd7ad0d2eae03e7969be2778603387925a66ac0882d0e8df5b19",
+  );
+});
