@@ -39,3 +39,16 @@ test("slide 03 corrections are baked into the blueprint without DOM patches", ()
     "db81fe839d22e7e1df9fa0cbf0b7849993838d3c64fd8faa1025709613b3e156",
   );
 });
+
+test("slide 04 corrections are baked into the blueprint without DOM patches", () => {
+  const slide = data.slides.find((item) => item.id === "04");
+  assert.equal(slide.patches, undefined);
+
+  const image = fs.readFileSync(
+    new URL("../public/blueprints-web/slide-04.jpg", import.meta.url),
+  );
+  assert.equal(
+    createHash("sha256").update(image).digest("hex"),
+    "66cd85afa57995ac89f7ad9d2029e69957628cac7de617011ce01631e5973ffb",
+  );
+});
