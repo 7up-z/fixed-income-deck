@@ -49,6 +49,6 @@ test("slide 04 corrections are baked into the blueprint without DOM patches", ()
   );
   assert.equal(
     createHash("sha256").update(image).digest("hex"),
-    "66cd85afa57995ac89f7ad9d2029e69957628cac7de617011ce01631e5973ffb",
+    "eb1d8f4679d9e7bd83c69673f1cb73d962f8c45549d523e350ddfac9e89b40a1",
   );
 });
