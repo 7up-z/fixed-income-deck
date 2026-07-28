@@ -72,3 +72,13 @@ test("slide 06 subtitle uses the shared section-title color", () => {
     "7a0f68d8456880ca4a0654af46aa8a2c9a8c9366f4886326d61043190b555cdf",
   );
 });
+
+test("slide 07 subtitle uses Arabic numbering and the shared color", () => {
+  const image = fs.readFileSync(
+    new URL("../public/blueprints-web/slide-07.jpg", import.meta.url),
+  );
+  assert.equal(
+    createHash("sha256").update(image).digest("hex"),
+    "6f7ffb207e48fc4758761de59c8599e2b37d37f2f1d16b0f42ff63ba37fdba17",
+  );
+});
