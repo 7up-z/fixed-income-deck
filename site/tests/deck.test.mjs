@@ -89,6 +89,6 @@ test("slide 08 contains the revised policy analysis copy", () => {
   );
   assert.equal(
     createHash("sha256").update(image).digest("hex"),
-    "c2fdb02725f9fd7ad0d2eae03e7969be2778603387925a66ac0882d0e8df5b19",
+    "420ef33cba16c525dd3d0e2b03f5ef692180cf2af4cff515a076204c332a9011",
   );
 });
